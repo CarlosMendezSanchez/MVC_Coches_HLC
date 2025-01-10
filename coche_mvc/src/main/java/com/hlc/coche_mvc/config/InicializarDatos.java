@@ -1,27 +1,28 @@
 package com.hlc.coche_mvc.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import com.hlc.coche_mvc.servicios.CocheServicio;
+import org.springframework.stereotype.Component;
+
 import com.hlc.coche_mvc.entidades.Coche;
+import com.hlc.coche_mvc.repositorios.CocheRepositorio;
 
 import jakarta.annotation.PostConstruct;
 
+@Component
 public class InicializarDatos {
-	@Autowired
-	private CocheServicio CocheServicio;
+	private CocheRepositorio cocheRepositorio;
+	
+	public InicializarDatos(CocheRepositorio cocheRepositorio) {
+		this.cocheRepositorio = cocheRepositorio;
+	}
 		
 		@PostConstruct
 		public void init() {
-			Coche coche1 = new Coche();
-			coche1.setMarca("Toyota");
-			coche1.setColor("Rojo");
-			coche1.setMatricula("1234ABC");
-			CocheServicio.guardarCoche(coche1);
+			Coche coche1 = new Coche("Toyota","1234ABC", "Rojo");
+			Coche coche2 = new Coche("Ford", "9876ZXY", "Verde");
+			Coche coche3 = new Coche("Honda", "913RST", "Negro");
 			
-			Coche coche2 = new Coche();
-			coche2.setMarca("Honda");
-			coche2.setColor("Azul");
-			coche2.setMatricula("5678DEF");
-			CocheServicio.guardarCoche(coche2);
+			cocheRepositorio.save(coche1);
+			cocheRepositorio.save(coche2);
+			cocheRepositorio.save(coche3);
 		}
 }
