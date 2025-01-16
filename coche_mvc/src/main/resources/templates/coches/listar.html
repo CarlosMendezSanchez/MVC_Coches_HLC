@@ -1,0 +1,22 @@
+<html>
+	<head><title>Listado de Coches</title></head>
+	<body>
+		<h1>Lista de Coches</h1>
+	<a th:href="@{/coches/nuevo}">Agregar coche</a>
+	<table border=1>
+		<thead>
+			<tr>
+				<th>Marca</th>
+				<th>Matricula</th>
+				<th>Color</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="coche : ${coches}"></tr>
+				<td th:text="${coche.marca}"></td>
+				<td th:text="${coche.matricula}"></td>
+				<td th:text="${coche.color}"></td>
+		</tbody>
+	</table>
+	</body>
+</html>
